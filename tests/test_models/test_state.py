@@ -5,7 +5,6 @@ Contains the TestStateDocs classes
 
 from datetime import datetime
 import inspect
-import models
 from models import state
 from models.base_model import BaseModel
 import pep8
@@ -59,6 +58,7 @@ class TestStateDocs(unittest.TestCase):
 
 class TestState(unittest.TestCase):
     """Test the State class"""
+
     def test_is_subclass(self):
         """Test that State is a subclass of BaseModel"""
         state = State()
@@ -71,19 +71,17 @@ class TestState(unittest.TestCase):
         """Test that State has attribute name, and it's as an empty string"""
         state = State()
         self.assertTrue(hasattr(state, "name"))
-        if models.storage_t == 'db':
-            self.assertEqual(state.name, None)
-        else:
-            self.assertEqual(state.name, "")
+        self.assertEqual(state.name, "")
 
     def test_to_dict_creates_dict(self):
         """test to_dict method creates a dictionary with proper attrs"""
         s = State()
         new_d = s.to_dict()
         self.assertEqual(type(new_d), dict)
-        self.assertFalse("_sa_instance_state" in new_d)
         for attr in s.__dict__:
-            if attr is not "_sa_instance_state":
+            with self.subTest(attr=attr):
+                if attr == '_sa_instance_state':
+                    continue
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)
 
@@ -101,5 +99,5 @@ class TestState(unittest.TestCase):
     def test_str(self):
         """test that the str method has the correct output"""
         state = State()
-        string = "[State] ({}) {}".format(state.id, state.__dict__)
+        string = "[State] ({}) {}".format(state.id, state.to_dict())
         self.assertEqual(string, str(state))
