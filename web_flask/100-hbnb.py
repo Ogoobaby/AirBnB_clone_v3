@@ -1,47 +1,46 @@
 #!/usr/bin/python3
 """
-This is module 10-hbnb_filters
-In this module we combine flask with sqlAlchemy for the first time
-Run this script from AirBnB_v2 directory for imports
+Flask App that integrates with AirBnB static HTML Template
 """
+from flask import Flask, render_template, url_for
 from models import storage
-from models.base_model import Base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from os import getenv
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from flask import Flask
-from flask import render_template
+
+
+# flask setup
 app = Flask(__name__)
+app.url_map.strict_slashes = False
+port = 5000
+host = '0.0.0.0'
 
 
-@app.route('/hbnb/')
-def hbnb():
-    states = storage.all("State").values()
-    amenities = storage.all("Amenity").values()
-    places_tmp = storage.all("Place").values()
-    owners = storage.all("User")
-    places = []
-    for k, v in owners.items():
-        for place in places_tmp:
-            if k == place.user_id:
-                places.append(["{} {}".format(
-                    v.first_name, v.last_name), place])
-    places.sort(key=lambda x: x[1].name)
-    return render_template("100-hbnb.html",
-                           amenities=amenities, result=states, places=places)
-
-
+# begin flask page rendering
 @app.teardown_appcontext
-def close_session(exception):
-    """Remove the db session or save file"""
+def teardown_db(exception):
+    """
+    after each request, this method calls .close() (i.e. .remove()) on
+    the current SQLAlchemy Session
+    """
     storage.close()
 
 
+@app.route('/hbnb')
+def hbnb_filters(the_id=None):
+    """
+    handles request to custom template with states, cities & amentities
+    """
+    state_objs = storage.all('State').values()
+    states = dict([state.name, state] for state in state_objs)
+    amens = storage.all('Amenity').values()
+    places = storage.all('Place').values()
+    users = dict([user.id, "{} {}".format(user.first_name, user.last_name)]
+                 for user in storage.all('User').values())
+    return render_template('100-hbnb.html',
+                           states=states,
+                           amens=amens,
+                           places=places,
+                           users=users)
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    """
+    MAIN Flask App"""
+    app.run(host=host, port=port)

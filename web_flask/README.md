@@ -1,17 +1,37 @@
-<h2>AirBnB clone - Web framework</h2>
+# AirBnB Clone: Flask Web Application
 
-For this part of the project, going back to our static webpages (see /web_static), we want to display the data we have stored (see /models/engine) and not fake values hard coded in the html pages.  
+## Description
 
-This project is done in python.  
-The first 5 questions are an introduction to Flask.  
-The next 2 are in introduction to jinja.  
-The next questions are mixing jinja, Flask and the storage engine.  
+This directory contains all the Web Application files for the Python Flask App.
+The Flask App and nginx are connected with gunicorn Web Server Gateway
+Interface (WSGI).
 
-______
-**Readings**  
-- [What is a web framework](https://jeffknupp.com/blog/2014/03/03/what-is-a-web-framework/)
-- [What is Flask](http://flask.pocoo.org/docs/0.12/quickstart/)  
-- [What is jinja](http://jinja.pocoo.org/docs/2.9/templates/)  
+## Environment
 
-**Install**  
-`pip3 install Flask`
+* __OS:__ Ubuntu 14.04 LTS
+* __language:__ Python 3.4.3
+* __application server:__ Flask 0.12.2, Jinja2 2.9.6
+* __database:__ mysql Ver 14.14 Distrib 5.7.18
+* __python style:__ PEP 8 (v. 1.7.0)
+* __web static style:__ [W3C Validator](https://validator.w3.org/)
+
+## Tests
+
+* Test Flask App integration with Storage Engine:
+
+```
+$ cat 7-dump.sql | mysql -uroot -p
+```
+
+* Test complete integation with files AirBnB HTML: `10-hbnb.py` &
+  `100-hbnb.html`. Execute from root directory (`AirBnB_clone`) with all the
+  necessary environmental variables to establish the database storage model:
+
+```
+$ cat 100-dump.sql | mysql -uroot -p
+$ python3 -m web_flask.100-hbnb
+```
+
+## License
+
+MIT License

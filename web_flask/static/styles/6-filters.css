@@ -1,105 +1,121 @@
-.container {
-    max-width: 1000px;
-    margin: 30px auto;
-    min-height: 100%;
+@charset "UTF-8";
+/** Holberton Practice Styles
+ * ------ Filters
+ */
+
+.container .filters {
+	height: 70px;
+	background-color: #FFFFFF;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+	z-index: 2;
+	position: relative;
 }
 
-.filters {
-    height: 70px;
-    width:  100%;
-    background-color: white;
-    border: solid 1px #dddddd;
-    border-radius: 4px;
-/*    padding: 10px;*/
-    box-sizing: border-box;
+.container .filters .locations {
+	width: 25%;
+	border-right: 1px solid #DDDDDD;
 }
 
-button {
-    height: 48px;
-    width: 20%;
-    background-color: #ff545f;
-    border:0;
-    border-radius: 4px;
-    float: right;
-    margin: 11px 30px;
-    font-size: 18px;
-    color: white;
+.container .filters .amenities {
+	width: 25%;
 }
 
-button:hover, button:focus {
-    background: rgba(255, 84, 95, 0.9);
+.container .filters button {
+	font-size: 18px;
+	background-color: #FF5A5F;
+	height: 48px;
+	width: 20%;
+	border: none;
+	border-radius: 4px;
+	margin: auto 30px auto auto;
 }
 
-.locations, .amenities {
-    height: 100%;
-    width: 25%;
-/*    margin-top: -10px;*/
-    padding-left: 30px;
-    display: inline-block;
-    position: relative;
+.container .filters button:hover {
+	opacity: 0.9;
 }
 
-.locations {
-    border-right: solid 1px #dddddd;
+/**
+ * ------ HEADERS
+ */
+
+.container .filters h2 {
+	font-size: 16px;
+	margin: 10px 0 5px 0;
 }
 
-h2, h3, h4 {
-    margin: 0;
-    padding: 12px 0 0 10px;
+.container .filters h3 {
+	font-weight: 600;
+	margin: 12px 0 4px 40px;
 }
 
-.locations h3, .amenities h3 {
-    font-weight: 600;
+.container .filters h4 {
+	font-weight: 400;
+	font-size: 14px;
+	margin: 7px 0 3px 40px;
 }
 
-.locations h4, .amenities h4 {
-    padding-top: 15px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 0%;
+/**
+ * ------ POPOVER
+ */
+
+.container .filters .locations:hover .popover {
+	display: list-item;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.container .filters .amenities:hover .popover {
+	display: list-item;
 }
 
-.popover {
-    width: 100.5%;
-    padding: 15px 0 30px 20px;
-    background-color: #fafafa;
-    border: solid 1px #dddddd;
-    border-radius: 4px;
-    z-index: 4;
-    float: left;
-    position: absolute;
-    top: 68px;
-    left: -0.5px;
-    display: none;
-    overflow: auto;
-    max-height: 300px;
+.container .filters .popover {
+	max-height: 300px;
+	overflow: scroll;
+	display: none;
+	list-style-type: none;
+	background-color: #FAFAFA;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	padding: 30px 40px 40px 30px;
+	margin: 15px -1px 0 -1px;
 }
 
-.popover.small-list {
-    padding: 20px 0px  30px 40px;
-    line-height: 30px;
+.container .filters .popover ul {
+	list-style-type: none;
+	padding-left: 20px;
 }
 
-.popover h2 {
-    padding-bottom: 2px;
+.container .filters .popover li {
+	margin: 5px 0 5px 0;
 }
 
-.popover ul {
-    padding: 0px 0px 10px 20px;
-    line-height: 25px;
-}
+@media screen and (max-width: 600px) {
 
-.locations:hover .popover {
-    display: block;
-}
+	.container .filters {
+		flex-direction: column;
+		height: auto;
+		width: 90%;
+		margin: auto;
+	}
 
-.amenities:hover .popover {
-    display: block;
+	.container .filters .locations {
+		border-bottom: 1px solid #DDDDDD;
+	}
+
+	.container .filters .locations,
+	.container .filters .amenities {
+		width: 100%;
+		border-right: none;
+		border-bottom: 1px solid #DDDDDD;
+	}
+
+	.container .filters button {
+		width: 80%;
+		margin: 5px auto;
+	}
+
 }
