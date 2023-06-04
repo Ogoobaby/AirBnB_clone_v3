@@ -154,8 +154,8 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
-Joseph Alfred Ukpaka - [Github](https://github.com/joe865)  
-Ogochukwu GloriaMary Nwanochiri - [Github](https://github.com/Ogoobaby)
+Eyoul Shimeles - [Github](https://github.com/eyoul)  
+Addisu Dabale - [Github](https://github.com/addisu30)
 
 ## License
 Public Domain. No copy write protection. 
